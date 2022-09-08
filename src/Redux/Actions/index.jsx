@@ -1,5 +1,5 @@
 export const ADD_EMAIL = 'ADD_EMAIL';
-export const ADD_TOKEN = 'ADD_TOKEN';
+export const ADD_NAME = 'ADD_NAME';
 
 export function userAction(payload) {
   return {
@@ -8,9 +8,9 @@ export function userAction(payload) {
   };
 }
 
-export function tokenAction(payload) {
+export function nameAction(payload) {
   return {
-    type: ADD_TOKEN,
+    type: ADD_NAME,
     payload,
   };
 }
