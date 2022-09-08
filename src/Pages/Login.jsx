@@ -23,6 +23,7 @@ class Login extends React.Component {
     const data = await fecthToken();
     const { token } = data;
     const { email } = this.state;
+    localStorage.setItem('token', token);
     dispatch(userAction(email));
     dispatch(tokenAction(token));
     history.push('/game');
