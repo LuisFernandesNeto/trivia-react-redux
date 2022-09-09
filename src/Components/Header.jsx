@@ -6,7 +6,7 @@ import logo from '../trivia.png';
 
 class Header extends React.Component {
   render() {
-    const { name, email } = this.props;
+    const { name, email, score } = this.props;
     const convertedEmail = md5(email).toString();
     return (
       <div>
@@ -20,7 +20,7 @@ class Header extends React.Component {
           data-testid="header-profile-picture"
         />
         <h2 data-testid="header-player-name">{ name }</h2>
-        <h2 data-testid="header-score">0</h2>
+        <h2 data-testid="header-score">{ score }</h2>
       </div>
     );
   }
@@ -29,11 +29,13 @@ class Header extends React.Component {
 const mapStateToProps = (state) => ({
   name: state.user.name,
   email: state.user.email,
+  score: state.player.score,
 });
 
 Header.propTypes = {
   name: PropTypes.string,
   email: PropTypes.string,
+  score: PropTypes.number,
 }.isRequired;
 
 export default connect(mapStateToProps)(Header);

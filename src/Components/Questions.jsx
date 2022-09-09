@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import propTypes from 'prop-types';
 import '../CSS/QuestionsCSS.css';
+import { scoreAction } from '../Redux/Actions';
 
 const CORRECT_ANSWER = 'correct-answer';
 
@@ -95,6 +96,7 @@ class Questions extends React.Component {
   };
 
   handleClick = (event) => {
+    const { score, dispatch } = this.props;
     const { correctAnswer } = this.state;
     const answer = event.target.innerText;
     const correctButton = document.getElementById(CORRECT_ANSWER);
@@ -102,6 +104,8 @@ class Questions extends React.Component {
     if (answer === correctAnswer) {
       correctButton.className = CORRECT_ANSWER;
       wrongtButton.forEach((wrong) => { wrong.className = 'wrong-answer'; });
+      const answerCorrectScore = score + 1;
+      dispatch(scoreAction(answerCorrectScore));
     } else {
       wrongtButton.forEach((wrong) => { wrong.className = 'wrong-answer'; });
       correctButton.className = CORRECT_ANSWER;
@@ -160,11 +164,17 @@ class Questions extends React.Component {
   }
 }
 
+const mapStateToProps = (state) => ({
+  score: state.player.score,
+});
+
 Questions.propTypes = {
   props: propTypes.func.isRequired,
   history: propTypes.shape({
     push: propTypes.func.isRequired,
   }).isRequired,
+  score: propTypes.number.isRequired,
+  dispatch: propTypes.func.isRequired,
 };
 
-export default connect()(Questions);
+export default connect(mapStateToProps)(Questions);
