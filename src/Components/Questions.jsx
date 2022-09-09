@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import propTypes from 'prop-types';
 import '../CSS/QuestionsCSS.css';
 import { scoreAction } from '../Redux/Actions';
+import ButtonNext from './ButtonNext';
 
 const CORRECT_ANSWER = 'correct-answer';
 
@@ -19,6 +20,7 @@ class Questions extends React.Component {
     allAnswers: [],
     randomizedAnswers: [],
     timer: 30,
+    btnNext: false,
   };
 
   componentDidMount() {
@@ -97,10 +99,12 @@ class Questions extends React.Component {
 
   handleClick = (event) => {
     const { score, dispatch } = this.props;
-    const { correctAnswer } = this.state;
+    const { correctAnswer, btnNext } = this.state;
     const answer = event.target.innerText;
     const correctButton = document.getElementById(CORRECT_ANSWER);
     const wrongtButton = document.querySelectorAll('#wrong-answer');
+    this.setState({ btnNext: true });
+    console.log(btnNext);
     if (answer === correctAnswer) {
       correctButton.className = CORRECT_ANSWER;
       wrongtButton.forEach((wrong) => { wrong.className = 'wrong-answer'; });
@@ -119,6 +123,7 @@ class Questions extends React.Component {
       correctAnswer,
       randomizedAnswers,
       timer,
+      btnNext,
     } = this.state;
     return (
       // O map vai percorrer o array de perguntas que já foi embaralhado (Linha 41),
@@ -130,6 +135,7 @@ class Questions extends React.Component {
         <h1>Questões</h1>
         <h3 data-testid="question-category">{ category }</h3>
         <h3 data-testid="question-text">{ question }</h3>
+        { btnNext ? <ButtonNext /> : null }
         <div id="answer-btn-div" data-testid="answer-options">
           {randomizedAnswers.map((answer, i) => (answer === correctAnswer
             ? (
