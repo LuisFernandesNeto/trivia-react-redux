@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import propTypes from 'prop-types';
 import '../CSS/QuestionsCSS.css';
 import { scoreAction } from '../Redux/Actions';
-import ButtonNext from './ButtonNext';
 
 const CORRECT_ANSWER = 'correct-answer';
 
@@ -116,6 +115,10 @@ class Questions extends React.Component {
     }
   };
 
+  btnNextChange = () => {
+    this.setState({ timer: 30 });
+  };
+
   render() {
     const {
       category,
@@ -135,7 +138,16 @@ class Questions extends React.Component {
         <h1>Questões</h1>
         <h3 data-testid="question-category">{ category }</h3>
         <h3 data-testid="question-text">{ question }</h3>
-        { btnNext ? <ButtonNext /> : null }
+        { btnNext
+          ? (
+            <button
+              type="submit"
+              data-testid="btn-next"
+              onClick={ this.btnNextChange }
+            >
+              Next
+            </button>
+          ) : null }
         <div id="answer-btn-div" data-testid="answer-options">
           {randomizedAnswers.map((answer, i) => (answer === correctAnswer
             ? (
