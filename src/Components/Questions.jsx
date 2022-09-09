@@ -1,6 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import propTypes from 'prop-types';
+import '../CSS/QuestionsCSS.css';
+
+const CORRECT_ANSWER = 'correct-answer';
 
 class Questions extends React.Component {
   // Como expliquei no Zoom, fiz a parte primária pra lógica de ter a ordem das questões gerenciada pelo estado local.
@@ -77,6 +80,20 @@ class Questions extends React.Component {
     }
   };
 
+  handleClick = (event) => {
+    const { correctAnswer } = this.state;
+    const answer = event.target.innerText;
+    const correctButton = document.getElementById(CORRECT_ANSWER);
+    const wrongtButton = document.querySelectorAll('#wrong-answer');
+    if (answer === correctAnswer) {
+      correctButton.className = CORRECT_ANSWER;
+      wrongtButton.forEach((wrong) => { wrong.className = 'wrong-answer'; });
+    } else {
+      wrongtButton.forEach((wrong) => { wrong.className = 'wrong-answer'; });
+      correctButton.className = CORRECT_ANSWER;
+    }
+  };
+
   render() {
     const {
       category,
@@ -95,7 +112,9 @@ class Questions extends React.Component {
           {randomizedAnswers.map((answer, i) => (answer === correctAnswer
             ? (
               <button
+                onClick={ this.handleClick }
                 id="correct-answer"
+                className="answer"
                 type="button"
                 key={ answer }
                 data-testid="correct-answer"
@@ -105,7 +124,9 @@ class Questions extends React.Component {
             )
             : (
               <button
+                onClick={ this.handleClick }
                 id="wrong-answer"
+                className="answer"
                 type="button"
                 key={ answer }
                 data-testid={ `wrong-answer-${i}` }
