@@ -17,10 +17,24 @@ class Questions extends React.Component {
     correctAnswer: '',
     allAnswers: [],
     randomizedAnswers: [],
+    timer: 30,
   };
 
   componentDidMount() {
     this.fetchQuestionWithToken();
+  }
+
+  componentDidUpdate() {
+    const { timer } = this.state;
+    const number = 1;
+    const second = 1000;
+    const zero = 0;
+    const timerTimeout = setTimeout(() => {
+      this.setState({ timer: timer - number });
+    }, second);
+    if (timer === zero) {
+      clearTimeout(timerTimeout);
+    }
   }
 
   // Função responsável por receber as questões e popular o estado do componente
@@ -99,12 +113,16 @@ class Questions extends React.Component {
       category,
       question,
       correctAnswer,
-      randomizedAnswers } = this.state;
+      randomizedAnswers,
+      timer,
+    } = this.state;
     return (
       // O map vai percorrer o array de perguntas que já foi embaralhado (Linha 41),
       // e renderizar elas em tela de acordo com as especificações do requisito,
       // verificando a resposta correta e atribuindo o id e data-testid de resposta correta.
       <div>
+        {/* { this.scoreTimer() } */}
+        <span>{ timer }</span>
         <h1>Questões</h1>
         <h3 data-testid="question-category">{ category }</h3>
         <h3 data-testid="question-text">{ question }</h3>
@@ -118,6 +136,7 @@ class Questions extends React.Component {
                 type="button"
                 key={ answer }
                 data-testid="correct-answer"
+                disabled={ timer === 0 / true }
               >
                 { answer }
               </button>
@@ -130,6 +149,7 @@ class Questions extends React.Component {
                 type="button"
                 key={ answer }
                 data-testid={ `wrong-answer-${i}` }
+                disabled={ timer === 0 / true }
               >
                 { answer }
               </button>
