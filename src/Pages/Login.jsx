@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { userAction, nameAction } from '../Redux/Actions';
-import fecthToken from '../APIs';
+import fetchToken from '../APIs';
 
 class Login extends React.Component {
   state = {
@@ -21,7 +21,7 @@ class Login extends React.Component {
   handleSubmit = async (event) => {
     event.preventDefault();
     const { dispatch, history } = this.props;
-    const data = await fecthToken();
+    const data = await fetchToken();
     const { token } = data;
     const { email, name } = this.state;
     localStorage.setItem('token', token);
