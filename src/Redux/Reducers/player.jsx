@@ -1,4 +1,4 @@
-import { ADD_SCORE } from '../Actions';
+import { ADD_SCORE, RESET_SCORE } from '../Actions';
 
 const INITIAL_STATE = {
   score: 0,
@@ -12,7 +12,7 @@ function player(state = INITIAL_STATE, action) {
     score: state.score + action.payload,
     assertions: state.assertions + 1,
   };
-  case 'RESET': return {
+  case RESET_SCORE: return {
     ...state,
     score: 0,
     assertions: 0,

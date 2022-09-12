@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import propTypes from 'prop-types';
 import md5 from 'crypto-js/md5';
 import Header from '../Components/Header';
-import { RESET } from '../Redux/Actions';
+import { resetAction } from '../Redux/Actions';
 
 class Feedback extends React.Component {
   componentDidMount() {
@@ -25,13 +25,13 @@ class Feedback extends React.Component {
 
   handleClick = () => {
     const { history, dispatch } = this.props;
-    dispatch(RESET);
+    dispatch(resetAction());
     history.push('/');
   };
 
   handleClickRanking = () => {
     const { history, dispatch } = this.props;
-    dispatch(RESET);
+    dispatch(resetAction());
     history.push('/ranking');
   };
 
