@@ -8,6 +8,11 @@ class Feedback extends React.Component {
     history.push('/');
   };
 
+  handleClickRanking = () => {
+    const { history } = this.props;
+    history.push('/ranking');
+  };
+
   render() {
     const { assertions, score } = this.props;
     const minimumNumber = 3;
@@ -24,6 +29,13 @@ class Feedback extends React.Component {
           onClick={ this.handleClick }
         >
           Play Again
+        </button>
+        <button
+          data-testid="btn-ranking"
+          type="submit"
+          onClick={ this.handleClickRanking }
+        >
+          Ranking
         </button>
       </div>
     );
