@@ -1,15 +1,37 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import propTypes from 'prop-types';
+import md5 from 'crypto-js/md5';
+import Header from '../Components/Header';
+import { RESET } from '../Redux/Actions';
 
 class Feedback extends React.Component {
+  componentDidMount() {
+    const { name, score, email } = this.props;
+    const convertedEmail = md5(email).toString();
+    const playerStorage = [{
+      name,
+      image: `https://www.gravatar.com/avatar/${convertedEmail}`,
+      score,
+    }];
+    if (localStorage.rankingStorage) {
+      const parsed = JSON.parse(localStorage.rankingStorage);
+      const newArray = [...parsed, ...playerStorage];
+      localStorage.setItem('rankingStorage', JSON.stringify(newArray));
+    } else {
+      localStorage.setItem('rankingStorage', JSON.stringify(playerStorage));
+    }
+  }
+
   handleClick = () => {
-    const { history } = this.props;
+    const { history, dispatch } = this.props;
+    dispatch(RESET);
     history.push('/');
   };
 
   handleClickRanking = () => {
-    const { history } = this.props;
+    const { history, dispatch } = this.props;
+    dispatch(RESET);
     history.push('/ranking');
   };
 
@@ -20,6 +42,7 @@ class Feedback extends React.Component {
       ? 'Well Done!' : 'Could be better...');
     return (
       <div>
+        <Header />
         <p data-testid="feedback-total-score">{ score }</p>
         <p data-testid="feedback-total-question">{ assertions }</p>
         <h1 data-testid="feedback-text">{ feedbackText }</h1>
@@ -45,11 +68,15 @@ class Feedback extends React.Component {
 const mapStateToProps = (state) => ({
   assertions: state.player.assertions,
   score: state.player.score,
+  name: state.user.name,
 });
 
 Feedback.propTypes = {
   assertions: propTypes.number.isRequired,
+  dispatch: propTypes.func.isRequired,
   score: propTypes.number.isRequired,
+  name: propTypes.string.isRequired,
+  email: propTypes.string.isRequired,
   history: propTypes.shape({
     push: propTypes.func.isRequired,
   }).isRequired,

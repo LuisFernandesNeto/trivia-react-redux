@@ -2,12 +2,13 @@ import React from 'react';
 import propTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Questions from '../Components/Questions';
+import Header from '../Components/Header';
 
 class Game extends React.Component {
   render() {
     return (
       <div>
-        Tela de Jogo
+        <Header />
         <Questions props={ this.props } />
       </div>
     );

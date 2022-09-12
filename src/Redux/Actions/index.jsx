@@ -1,6 +1,7 @@
 export const ADD_EMAIL = 'ADD_EMAIL';
 export const ADD_NAME = 'ADD_NAME';
 export const ADD_SCORE = 'ADD_SCORE';
+export const RESET_SCORE = 'RESET_SCORE';
 
 export function userAction(payload) {
   return {
@@ -20,5 +21,11 @@ export function scoreAction(payload) {
   return {
     type: ADD_SCORE,
     payload,
+  };
+}
+
+export function resetAction() {
+  return {
+    type: RESET_SCORE,
   };
 }
