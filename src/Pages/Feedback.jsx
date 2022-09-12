@@ -5,15 +5,12 @@ import propTypes from 'prop-types';
 class Feedback extends React.Component {
   render() {
     const { correct } = this.props;
-    let feedbackText = '';
+    let feedbackText = ((correct >= minimumNumber) ? 'Well Done!' : 'Could be better...');
     const minimumNumber = 3;
-    correct >= minimumNumber 
-    ? feedbackText = 'Well Done!' 
-    : feedbackText = 'Could be better...';
     return (
       <div>
         Tela de Feedback
-        <h1 data-testid="feedback-text">{feedbackText}</h1>
+        <h1 data-testid="feedback-text">{ feedbackText }</h1>
       </div>
     );
   }
