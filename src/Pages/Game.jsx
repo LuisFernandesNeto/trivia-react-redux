@@ -8,6 +8,7 @@ class Game extends React.Component {
   render() {
     return (
       <div>
+        Trivia
         <Header />
         <Questions props={ this.props } />
       </div>
