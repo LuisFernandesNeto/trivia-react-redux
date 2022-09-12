@@ -6,12 +6,10 @@ class Feedback extends React.Component {
   render() {
     const { correct } = this.props;
     let feedbackText = '';
-    const minimunNumber = 3;
-    if (correct >= minimunNumber) {
-      feedbackText = 'Well Done!';
-    } else {
-      feedbackText = 'Could be better...';
-    }
+    const minimumNumber = 3;
+    correct >= minimumNumber 
+    ? feedbackText = 'Well Done!' 
+    : feedbackText = 'Could be better...';
     return (
       <div>
         Tela de Feedback
