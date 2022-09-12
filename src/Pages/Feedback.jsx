@@ -4,12 +4,14 @@ import propTypes from 'prop-types';
 
 class Feedback extends React.Component {
   render() {
-    const { correct } = this.props;
-    let feedbackText = ((correct >= minimumNumber) ? 'Well Done!' : 'Could be better...');
+    const { assertions, score } = this.props;
     const minimumNumber = 3;
+    const feedbackText = ((assertions >= minimumNumber)
+      ? 'Well Done!' : 'Could be better...');
     return (
       <div>
-        Tela de Feedback
+        <p data-testid="feedback-total-score">{ score }</p>
+        <p data-testid="feedback-total-question">{ assertions }</p>
         <h1 data-testid="feedback-text">{ feedbackText }</h1>
       </div>
     );
@@ -17,11 +19,13 @@ class Feedback extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
-  correct: state.player.correct,
+  assertions: state.player.assertions,
+  score: state.player.score,
 });
 
 Feedback.propTypes = {
-  correct: propTypes.number.isRequired,
+  assertions: propTypes.number.isRequired,
+  score: propTypes.number.isRequired,
 };
 
 export default connect(mapStateToProps)(Feedback);
