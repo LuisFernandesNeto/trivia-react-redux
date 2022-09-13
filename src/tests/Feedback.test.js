@@ -4,7 +4,7 @@ import userEvent from '@testing-library/user-event';
 import App from '../App';
 import { renderWithRouterAndRedux } from './helpers/renderWithRouterAndRedux';
 
-const Route = '/Feedback';
+const route = '/Feedback';
 const INITIAL_STATE = {
   player: {
     name: 'Alex',
@@ -34,21 +34,21 @@ describe('Testes para a página de feedbacks', () => {
   });
 
   it('Renderizações do texto quando acerta 3 questões', () => {
-    renderWithRouterAndRedux(<App />, INITIAL_STATE, Route);
+    renderWithRouterAndRedux(<App />, INITIAL_STATE, route);
 
     const txtHeading = screen.getByRole('heading', { name: /well done!/i, level: 1 });
     expect(txtHeading).toBeInTheDocument();
   });
 
   it('Renderizações do texto quando acerta 3 questões', () => {
-    renderWithRouterAndRedux(<App />, STATE, Route);
+    renderWithRouterAndRedux(<App />, STATE, route);
 
     const txtH1 = screen.getByRole('heading', { name: /Could be better.../i, level: 1 });
     expect(txtH1).toBeInTheDocument();
   });
 
   it('Verifica se o botão ranking muda para a página ranking', () => {
-    const { history } = renderWithRouterAndRedux(<App />, STATE, Route);
+    const { history } = renderWithRouterAndRedux(<App />, STATE, route);
 
     const rankingButton = screen.getByRole('button', { name: /Ranking/i });
     expect(rankingButton).toBeInTheDocument();

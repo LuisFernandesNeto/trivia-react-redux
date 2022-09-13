@@ -6,7 +6,7 @@ import { renderWithRouterAndRedux } from './helpers/renderWithRouterAndRedux';
 
 describe('Login de usuários', () => {
   test('Verifica se a tela home está funcionando completamente', async () => {
-    renderWithRouterAndRedux(<App />);
+    const { history } = renderWithRouterAndRedux(<App />);
     const response = {
       response_code: 0,
       response_message: 'Token Generated Successfully!',
@@ -34,7 +34,9 @@ describe('Login de usuários', () => {
     expect(global.fetch).toBeCalledTimes(1);
     await waitFor(() => expect(screen.getByText(/Trivia/i)).toBeInTheDocument());
 
-    /* const { location: { pathname } } = history;
-    expect(pathname).toBe('/'); */
+    const question = screen.getByRole('heading', { name: /questões/i, level: 1 });
+    expect(question).toBeInTheDocument();
+
+    expect(history.location.pathname).toEqual('/game');
   });
 });
