@@ -11,11 +11,11 @@ describe('Login de usuários', () => {
       response_code: 0,
       response_message: 'Token Generated Successfully!',
       token: '0ad9ff7a6c9090d4ea225e7467e50e31567bdac8d21a5ed1d774e51033b17c51' };
-      
-      jest.spyOn(global, 'fetch');
-      global.fetch.mockResolvedValue({
-        json: jest.fn().mockResolvedValue(response),
-      });
+
+    jest.spyOn(global, 'fetch');
+    global.fetch.mockResolvedValue({
+      json: jest.fn().mockResolvedValue(response),
+    });
     const emailInput = screen.getByTestId(/input-gravatar-email/i);
     const nameInput = screen.getByTestId(/input-player-name/i);
     expect(emailInput).toBeInTheDocument();
@@ -23,14 +23,14 @@ describe('Login de usuários', () => {
     const playButton = screen.getByRole('button', { name: /Play/i });
     expect(playButton).toBeInTheDocument();
     expect(playButton).toBeDisabled();
-    
+
     userEvent.type(emailInput, 'luisfernandesneto@gmail.com');
     userEvent.type(nameInput, 'Luis');
 
     expect(playButton).not.toBeDisabled();
 
     userEvent.click(playButton);
-    
+
     expect(global.fetch).toBeCalledTimes(1);
     await waitFor(() => expect(screen.getByText(/Trivia/i)).toBeInTheDocument());
 
