@@ -52,17 +52,13 @@ class Questions extends React.Component {
     const { props: { history } } = this.props;
     const { token } = localStorage;
     const url = `https://opentdb.com/api.php?amount=5&token=${token}`;
-    try {
-      const fetchWithToken = await fetch(url);
-      const fetchResultJson = await fetchWithToken.json();
-      if (fetchResultJson.response_code === errorNumber) {
-        history.push('/');
-      } else {
-        this.questionToState(fetchResultJson.results);
-        console.log(fetchResultJson.results);
-      }
-    } catch (error) {
-      console.log('Algo de errado aconteceu no Try');
+    const fetchWithToken = await fetch(url);
+    const fetchResultJson = await fetchWithToken.json();
+    if (fetchResultJson.response_code === errorNumber) {
+      history.push('/');
+    } else {
+      this.questionToState(fetchResultJson.results);
+      console.log(fetchResultJson.results);
     }
   };
 

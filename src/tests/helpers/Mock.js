@@ -16,7 +16,7 @@ const questions = {
     {
       category: 'Geography',
       type: 'multiple',
-      difficulty: 'easy',
+      difficulty: 'hard',
       question: 'How many countries does Mexico border?',
       correct_answer: '3',
       incorrect_answers: [
@@ -28,7 +28,7 @@ const questions = {
     {
       category: 'Entertainment: Board Games',
       type: 'multiple',
-      difficulty: 'medium',
+      difficulty: 'hard',
       question: 'Europa Universalis is a strategy video',
       correct_answer: 'Europa Universalis',
       incorrect_answers: [
@@ -40,7 +40,7 @@ const questions = {
     {
       category: 'Entertainment: Music',
       type: 'multiple',
-      difficulty: 'medium',
+      difficulty: 'hard',
       question: 'Which novelty band was best known for',
       correct_answer: 'The Wurzels',
       incorrect_answers: [
