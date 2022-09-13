@@ -165,7 +165,7 @@ class Questions extends React.Component {
     } = this.state;
     return (
       <div>
-        <span>{ timer }</span>
+        <h2>{ timer }</h2>
         <h1>Questões</h1>
         <h3 data-testid="question-category">{ category }</h3>
         <h3 data-testid="question-text">{ question }</h3>
